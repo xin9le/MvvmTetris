@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using BlazorTetris.Extensions;
 using BlazorTetris.Models;
 using Reactive.Bindings;
@@ -26,6 +28,13 @@ namespace BlazorTetris.ViewModels
         /// セルのコレクションを取得します。
         /// </summary>
         public CellViewModel[,] Cells { get; }
+
+
+        /// <summary>
+        /// テトリミノが移動したときに呼び出されます。
+        /// </summary>
+        public IObservable<Unit> TetriminoMoved => this.tetriminoMoved;
+        private Subject<Unit> tetriminoMoved = new Subject<Unit>();
 
 
         /// <summary>
@@ -72,6 +81,7 @@ namespace BlazorTetris.ViewModels
                                     ?? this.BackgroundColor;
                         item.Element.Color.Value = color;
                     }
+                    this.tetriminoMoved.OnNext(Unit.Default);
                 });
         }
         #endregion
