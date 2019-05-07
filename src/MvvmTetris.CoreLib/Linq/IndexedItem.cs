@@ -4,7 +4,7 @@
     /// インデックス化された要素を表します。
     /// </summary>
     /// <typeparam name="T">要素の型</typeparam>
-    public struct IndexedItem<T>
+    public readonly struct IndexedItem<T>
     {
         #region プロパティ
         /// <summary>
@@ -40,7 +40,7 @@
     /// 2 次元のインデックス化された要素を表します。
     /// </summary>
     /// <typeparam name="T">要素の型</typeparam>
-    public struct IndexedItem2<T>
+    public readonly struct IndexedItem2<T>
     {
         #region プロパティ
         /// <summary>
