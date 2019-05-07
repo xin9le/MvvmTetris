@@ -90,18 +90,29 @@ namespace MvvmTetris.Engine.Models
 
         #region 操作
         /// <summary>
-        /// アクティブ化します。
+        /// 開始します。
         /// </summary>
-        /// <param name="kind">最初のテトリミノの種類</param>
-        public void Activate(TetriminoKind kind)
+        /// <param name="initial">最初のテトリミノの種類</param>
+        public void Start(TetriminoKind initial)
+        {
+            this.Reset();
+            this.isActivated.Value = true;
+            this.Tetrimino.Value = Models.Tetrimino.Create(initial);
+            this.Timer.Start();
+        }
+
+
+        /// <summary>
+        /// リセットします。
+        /// </summary>
+        public void Reset()
         {
             this.Timer.Stop();
-            this.isActivated.Value = true;
-            this.isUpperLimitOvered.Value = false;
-            this.Tetrimino.Value = Models.Tetrimino.Create(kind);
-            this.placedBlocks.Value = Array.Empty<Block>();
             this.Timer.Interval = 1000;
-            this.Timer.Start();
+            this.isActivated.Value = false;
+            this.isUpperLimitOvered.Value = false;
+            this.Tetrimino.Value = null;
+            this.placedBlocks.Value = Array.Empty<Block>();
         }
 
 

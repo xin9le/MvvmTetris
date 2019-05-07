@@ -82,9 +82,10 @@ namespace MvvmTetris.Engine.Models
         /// </summary>
         public void Play()
         {
+            this.Field.Reset();
             this.PreviousCount = 0;
             this.nextTetrimino.Value = Tetrimino.RandomKind();
-            this.Field.Activate(Tetrimino.RandomKind());
+            this.Field.Start(Tetrimino.RandomKind());
             this.Result.Clear();
         }
         #endregion
