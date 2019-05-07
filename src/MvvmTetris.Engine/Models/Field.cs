@@ -79,9 +79,11 @@ namespace MvvmTetris.Engine.Models
         /// </summary>
         public Field()
         {
-            this.Timer.ElapsedAsObservable()
-                //.ObserveOn(System.Threading.SynchronizationContext.Current)
-                .Subscribe(x => this.MoveTetrimino(MoveDirection.Down));
+            var sequence = this.Timer.ElapsedAsObservable();
+            var context = System.Threading.SynchronizationContext.Current;
+            if (context != null)
+                sequence = sequence.ObserveOn(context);
+            sequence.Subscribe(x => this.MoveTetrimino(MoveDirection.Down));
         }
         #endregion
 
