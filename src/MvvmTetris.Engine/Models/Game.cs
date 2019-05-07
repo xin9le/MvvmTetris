@@ -27,13 +27,13 @@ namespace MvvmTetris.Engine.Models
         /// <summary>
         /// プレイ中かどうかを取得します。
         /// </summary>
-        public IReadOnlyReactiveProperty<bool> IsPlaying => this.Field.IsActivated.ToReadOnlyReactiveProperty();
+        public IReadOnlyReactiveProperty<bool> IsPlaying => this.Field.IsActivated;
 
 
         /// <summary>
         /// ゲームオーバー状態になっているかどうかを取得します。
         /// </summary>
-        public IReadOnlyReactiveProperty<bool> IsOver => this.Field.IsUpperLimitOvered.ToReadOnlyReactiveProperty();
+        public IReadOnlyReactiveProperty<bool> IsOver => this.Field.IsUpperLimitOvered;
 
 
         /// <summary>
@@ -82,9 +82,6 @@ namespace MvvmTetris.Engine.Models
         /// </summary>
         public void Play()
         {
-            if (this.IsPlaying.Value)
-                return;
-
             this.PreviousCount = 0;
             this.nextTetrimino.Value = Tetrimino.RandomKind();
             this.Field.Activate(Tetrimino.RandomKind());

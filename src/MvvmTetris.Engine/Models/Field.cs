@@ -93,6 +93,7 @@ namespace MvvmTetris.Engine.Models
         /// <param name="kind">最初のテトリミノの種類</param>
         public void Activate(TetriminoKind kind)
         {
+            this.Timer.Stop();
             this.isActivated.Value = true;
             this.isUpperLimitOvered.Value = false;
             this.Tetrimino.Value = Models.Tetrimino.Create(kind);
