@@ -84,7 +84,8 @@ namespace MvvmTetris.Engine.ViewModels
                         item.Element.Color.Value = color;
                     }
                 })
-                .Select(_ => Unit.Default);
+                .Select(_ => Unit.Default)
+                .ToReadOnlyReactiveProperty(mode: ReactivePropertyMode.None);  // subscribe and fire changed
         }
         #endregion
 
