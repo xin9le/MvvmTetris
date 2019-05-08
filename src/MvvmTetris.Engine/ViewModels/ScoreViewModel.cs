@@ -6,45 +6,45 @@ using MvvmTetris.Engine.Models;
 namespace MvvmTetris.Engine.ViewModels
 {
     /// <summary>
-    /// ゲーム結果を表します。
+    /// ゲームスコア結果を表します。
     /// </summary>
-    public class GameResultViewModel
+    public class ScoreViewModel
     {
         #region プロパティ
         /// <summary>
-        /// ゲーム結果を取得します。
+        /// ゲームスコアを取得します。
         /// </summary>
-        private GameResult Result { get; }
+        private Score Score { get; }
 
 
         /// <summary>
         /// 消した合計行数を取得します。
         /// </summary>
-        public IReadOnlyReactiveProperty<int> TotalRowCount => this.Result.TotalRowCount;
+        public IReadOnlyReactiveProperty<int> TotalRowCount => this.Score.TotalRowCount;
 
 
         /// <summary>
         /// 1 行で消した回数を取得します。
         /// </summary>
-        public IReadOnlyReactiveProperty<int> RowCount1 => this.Result.RowCount1;
+        public IReadOnlyReactiveProperty<int> RowCount1 => this.Score.RowCount1;
 
 
         /// <summary>
         /// 2 行で消した回数を取得します。
         /// </summary>
-        public IReadOnlyReactiveProperty<int> RowCount2 => this.Result.RowCount2;
+        public IReadOnlyReactiveProperty<int> RowCount2 => this.Score.RowCount2;
 
 
         /// <summary>
         /// 3 行で消した回数を取得します。
         /// </summary>
-        public IReadOnlyReactiveProperty<int> RowCount3 => this.Result.RowCount3;
+        public IReadOnlyReactiveProperty<int> RowCount3 => this.Score.RowCount3;
 
 
         /// <summary>
         /// 4 行で消した回数を取得します。
         /// </summary>
-        public IReadOnlyReactiveProperty<int> RowCount4 => this.Result.RowCount4;
+        public IReadOnlyReactiveProperty<int> RowCount4 => this.Score.RowCount4;
         #endregion
 
 
@@ -52,11 +52,9 @@ namespace MvvmTetris.Engine.ViewModels
         /// <summary>
         /// インスタンスを生成します。
         /// </summary>
-        /// <param name="result">ゲーム結果</param>
-        public GameResultViewModel(GameResult result)
-        {
-            this.Result = result;
-        }
+        /// <param name="score">ゲームスコア</param>
+        public ScoreViewModel(Score score)
+            => this.Score = score;
         #endregion
     }
 }

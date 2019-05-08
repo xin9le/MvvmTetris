@@ -29,7 +29,7 @@
             <Grid x:Name="nextField" DataContext="{Binding NextField}" HorizontalAlignment="Center" />
 
             <!-- スコア -->
-            <Grid Grid.Row="2" HorizontalAlignment="Center" DataContext="{Binding Result}">
+            <Grid Grid.Row="2" HorizontalAlignment="Center" DataContext="{Binding Score}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />

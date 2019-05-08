@@ -18,9 +18,9 @@ namespace MvvmTetris.Engine.ViewModels
 
 
         /// <summary>
-        /// ゲーム結果を取得します。
+        /// ゲームスコアを取得します。
         /// </summary>
-        public GameResultViewModel Result { get; }
+        public ScoreViewModel Score { get; }
 
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace MvvmTetris.Engine.ViewModels
         /// </summary>
         public GameViewModel()
         {
-            this.Result = new GameResultViewModel(this.Game.Result);
+            this.Score = new ScoreViewModel(this.Game.Score);
             this.Field = new FieldViewModel(this.Game.Field);
             this.NextField = new NextFieldViewModel(this.Game.NextTetrimino);
         }

@@ -7,9 +7,9 @@ using Reactive.Bindings;
 namespace MvvmTetris.Engine.Models
 {
     /// <summary>
-    /// ゲーム結果を表します。
+    /// ゲームの記録を表します。
     /// </summary>
-    public class GameResult
+    public class Score
     {
         #region プロパティ
         /// <summary>
@@ -51,7 +51,7 @@ namespace MvvmTetris.Engine.Models
         /// <summary>
         /// インスタンスを生成します。
         /// </summary>
-        public GameResult()
+        public Score()
         {
             this.TotalRowCount
                 = this.RowCount1.CombineLatest

@@ -13,9 +13,9 @@ namespace MvvmTetris.Engine.Models
     {
         #region プロパティ
         /// <summary>
-        /// ゲーム結果を取得します。
+        /// ゲームスコアを取得します。
         /// </summary>
-        public GameResult Result { get; } = new GameResult();
+        public Score Score { get; } = new Score();
 
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace MvvmTetris.Engine.Models
             this.Field.PlacedBlocks.Subscribe(_ =>
             {
                 //--- 10 行消すたびにスピードアップ
-                var count = this.Result.TotalRowCount.Value / 10;
+                var count = this.Score.TotalRowCount.Value / 10;
                 if (count > this.PreviousCount)
                 {
                     this.PreviousCount = count;
@@ -71,7 +71,7 @@ namespace MvvmTetris.Engine.Models
                 this.nextTetrimino.Value = Tetrimino.RandomKind();
                 this.Field.Tetrimino.Value = Tetrimino.Create(kind);
             });
-            this.Field.LastRemovedRowCount.Subscribe(this.Result.AddRowCount);
+            this.Field.LastRemovedRowCount.Subscribe(this.Score.AddRowCount);
         }
         #endregion
 
@@ -86,7 +86,7 @@ namespace MvvmTetris.Engine.Models
             this.PreviousCount = 0;
             this.nextTetrimino.Value = Tetrimino.RandomKind();
             this.Field.Start(Tetrimino.RandomKind());
-            this.Result.Clear();
+            this.Score.Clear();
         }
         #endregion
     }
