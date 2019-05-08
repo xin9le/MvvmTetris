@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Reactive.Subjects;
 using MvvmTetris.Collections.Generic;
 using MvvmTetris.Engine.Models;
 using MvvmTetris.Linq;
@@ -34,8 +33,7 @@ namespace MvvmTetris.Engine.ViewModels
         /// <summary>
         /// テトリミノが移動したときに呼び出されます。
         /// </summary>
-        public IObservable<Unit> TetriminoMoved => this.tetriminoMoved;
-        private Subject<Unit> tetriminoMoved = new Subject<Unit>();
+        public IObservable<Unit> TetriminoMoved { get; }
 
 
         /// <summary>
@@ -65,14 +63,15 @@ namespace MvvmTetris.Engine.ViewModels
                 this.Cells[item.X, item.Y] = new CellViewModel();
 
             //--- ブロックに関する変更を処理
-            this.Field.Tetrimino
+            this.TetriminoMoved
+                = this.Field.Tetrimino
                 .CombineLatest
                 (
                     this.Field.PlacedBlocks,
                     (t, p) => (t == null ? p : p.Concat(t.Blocks))
                             .ToDictionary2(x => x.Position.Row, x => x.Position.Column)
                 )
-                .Subscribe(x =>
+                .Do(x =>
                 {
                     foreach (var item in this.Cells.WithIndex())
                     {
@@ -82,8 +81,8 @@ namespace MvvmTetris.Engine.ViewModels
                                     ?? this.BackgroundColor;
                         item.Element.Color.Value = color;
                     }
-                    this.tetriminoMoved.OnNext(Unit.Default);
-                });
+                })
+                .Select(_ => Unit.Default);
         }
         #endregion
 
