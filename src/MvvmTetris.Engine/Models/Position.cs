@@ -1,13 +1,9 @@
-﻿using This = MvvmTetris.Engine.Models.Position;
-
-
-
-namespace MvvmTetris.Engine.Models
+﻿namespace MvvmTetris.Engine.Models
 {
     /// <summary>
     /// 座標を表します。
     /// </summary>
-    public struct Position
+    public readonly struct Position
     {
         #region プロパティ
         /// <summary>
@@ -44,7 +40,7 @@ namespace MvvmTetris.Engine.Models
         /// <param name="obj">比較対象インスタンス</param>
         /// <returns>等価な場合true</returns>
         public override bool Equals(object obj)
-            => this == (This)obj;
+            => this == (Position)obj;
 
 
         /// <summary>
@@ -71,7 +67,7 @@ namespace MvvmTetris.Engine.Models
         /// <param name="left">左辺</param>
         /// <param name="right">右辺</param>
         /// <returns>等価であればtrue</returns>
-        public static bool operator ==(This left, This right)
+        public static bool operator ==(Position left, Position right)
             => left.Row == right.Row
             && left.Column == right.Column;
 
@@ -82,7 +78,7 @@ namespace MvvmTetris.Engine.Models
         /// <param name="left">左辺</param>
         /// <param name="right">右辺</param>
         /// <returns>等価であればtrue</returns>
-        public static bool operator !=(This left, This right)
+        public static bool operator !=(Position left, Position right)
             => !(left == right);
         #endregion
     }
