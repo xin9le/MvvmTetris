@@ -1,0 +1,44 @@
+﻿@inherits Microsoft.AspNetCore.Components.ComponentBase
+
+
+@using System
+@using Microsoft.AspNetCore.Components
+@using MvvmTetris.Engine.ViewModels
+
+
+@functions
+{
+    [Parameter]
+    public IFieldViewModel Field { get; set; }
+
+
+    protected override void OnInit()
+    {
+        this.Field.Changed.Subscribe(_ => this.StateHasChanged());
+    }
+}
+
+
+<div>
+    <table border="1" class="field">
+        <tbody>
+            @{
+                var cells = this.Field.Cells;
+                var rowCount = cells.GetLength(0);
+                var columnCount = cells.GetLength(1);
+
+                for (var r = 0; r < cells.GetLength(0); r++)
+                {
+                    <tr>
+                        @for (var c = 0; c < columnCount; c++)
+                        {
+                            var color = cells[r, c].Color.Value;
+                            var rgb = $"rgb({color.R}, {color.G}, {color.B})";
+                            <td style="background-color: @rgb"></td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
