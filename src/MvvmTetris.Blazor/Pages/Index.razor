@@ -35,6 +35,15 @@
 
 
 <div tabindex="0" onkeydown="@this.OnKeyDown">
-    <FieldComponent Field="@this.Game.Field" />
-    <FieldComponent Field="@this.Game.NextField" />
+    <div class="game container">
+        <div class="row">
+            <div class="col-8">
+                <FieldComponent Field="@this.Game.Field" />
+            </div>
+            <div class="col-4">
+                <FieldComponent Field="@this.Game.NextField" />
+                <ScoreComponent />
+            </div>
+        </div>
+    </div>
 </div>
