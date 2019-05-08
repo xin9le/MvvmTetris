@@ -7,7 +7,7 @@ namespace MvvmTetris.Engine.Models
     /// <summary>
     /// ブロックとしての機能を提供します。
     /// </summary>
-    public class Block
+    public readonly struct Block
     {
         #region プロパティ
         /// <summary>

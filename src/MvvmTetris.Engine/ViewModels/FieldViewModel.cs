@@ -71,7 +71,7 @@ namespace MvvmTetris.Engine.ViewModels
                 (
                     this.Field.PlacedBlocks,
                     (t, p) => (t == null ? p : p.Concat(t.Blocks))
-                            .ToDictionary2(x => x.Position.Row, x => x.Position.Column)
+                            .ToDictionary2(x => x.Position.Row, x => x.Position.Column, x => (Block?)x)
                 )
                 .Do(x =>
                 {

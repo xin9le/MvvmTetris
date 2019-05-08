@@ -68,7 +68,12 @@ namespace MvvmTetris.Engine.ViewModels
             //--- ブロックに関する変更を処理
             this.Changed
                 = nextTetrimino
-                .Select(x => Tetrimino.Create(x).Blocks.ToDictionary2(y => y.Position.Row, y => y.Position.Column))
+                .Select(x => Tetrimino.Create(x).Blocks.ToDictionary2
+                (
+                    y => y.Position.Row,
+                    y => y.Position.Column,
+                    y => (Block?)y
+                ))
                 .Do(x =>
                 {
                     //--- ViewPort のオフセット調整

@@ -216,9 +216,6 @@ namespace MvvmTetris.Engine.Models
         /// <returns>衝突している場合true</returns>
         private bool CheckCollision(Block block)
         {
-            if (block == null)
-                throw new ArgumentNullException(nameof(block));
-
             //--- 左側の壁にめり込んでいる
             if (block.Position.Column < 0)
                 return true;
