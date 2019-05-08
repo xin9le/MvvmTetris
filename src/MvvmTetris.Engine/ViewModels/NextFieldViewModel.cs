@@ -15,7 +15,7 @@ namespace MvvmTetris.Engine.ViewModels
     /// <summary>
     /// 次のテトリミノを表示するためのフィールド用のモデルを提供します。
     /// </summary>
-    public class NextFieldViewModel
+    public class NextFieldViewModel : IFieldViewModel
     {
         #region 定数
         /// <summary>
@@ -31,17 +31,19 @@ namespace MvvmTetris.Engine.ViewModels
         #endregion
 
 
+        #region イベント
+        /// <summary>
+        /// 変更されたときに呼び出されます。
+        /// </summary>
+        public IObservable<Unit> Changed { get; }
+        #endregion
+
+
         #region プロパティ
         /// <summary>
         /// セルのコレクションを取得します。
         /// </summary>
         public CellViewModel[,] Cells { get; }
-
-
-        /// <summary>
-        /// テトリミノが変更されたときに呼び出されます。
-        /// </summary>
-        public IObservable<Unit> TetriminoChanged { get; }
 
 
         /// <summary>
@@ -64,7 +66,7 @@ namespace MvvmTetris.Engine.ViewModels
                 this.Cells[item.X, item.Y] = new CellViewModel();
 
             //--- ブロックに関する変更を処理
-            this.TetriminoChanged
+            this.Changed
                 = nextTetrimino
                 .Select(x => Tetrimino.Create(x).Blocks.ToDictionary2(y => y.Position.Row, y => y.Position.Column))
                 .Do(x =>

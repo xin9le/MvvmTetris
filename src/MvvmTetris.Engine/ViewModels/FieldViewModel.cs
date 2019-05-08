@@ -15,8 +15,16 @@ namespace MvvmTetris.Engine.ViewModels
     /// <summary>
     /// フィールド描画用のモデルを提供します。
     /// </summary>
-    public class FieldViewModel
+    public class FieldViewModel : IFieldViewModel
     {
+        #region イベント
+        /// <summary>
+        /// 変更されたときに呼び出されます。
+        /// </summary>
+        public IObservable<Unit> Changed { get; }
+        #endregion
+
+
         #region プロパティ
         /// <summary>
         /// テトリスの場を取得します。
@@ -28,12 +36,6 @@ namespace MvvmTetris.Engine.ViewModels
         /// セルのコレクションを取得します。
         /// </summary>
         public CellViewModel[,] Cells { get; }
-
-
-        /// <summary>
-        /// テトリミノが移動したときに呼び出されます。
-        /// </summary>
-        public IObservable<Unit> TetriminoMoved { get; }
 
 
         /// <summary>
@@ -63,7 +65,7 @@ namespace MvvmTetris.Engine.ViewModels
                 this.Cells[item.X, item.Y] = new CellViewModel();
 
             //--- ブロックに関する変更を処理
-            this.TetriminoMoved
+            this.Changed
                 = this.Field.Tetrimino
                 .CombineLatest
                 (
