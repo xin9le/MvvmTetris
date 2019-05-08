@@ -179,9 +179,8 @@ namespace MvvmTetris.Engine.Models
             var result = this.RemoveAndFixBlock();
 
             //--- 揃った行数を通知
-            var removedRowCount = result.removedRowCount;
-            if (removedRowCount > 0)
-                this.lastRemovedRowCount.Value = removedRowCount;
+            if (result.removedRowCount > 0)
+                this.lastRemovedRowCount.Value = result.removedRowCount;
 
             //--- ブロックが上限を超えていたらゲームオーバー
             if (result.blocks.Any(x => x.Position.Row < 0))
