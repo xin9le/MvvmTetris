@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using MvvmTetris.Collections.Generic;
 using MvvmTetris.Engine.Models;
@@ -38,6 +39,12 @@ namespace MvvmTetris.Engine.ViewModels
 
 
         /// <summary>
+        /// テトリミノが変更されたときに呼び出されます。
+        /// </summary>
+        public IObservable<Unit> TetriminoChanged { get; }
+
+
+        /// <summary>
         /// 背景色を取得します。
         /// </summary>
         private Color BackgroundColor => Color.WhiteSmoke;
@@ -57,9 +64,10 @@ namespace MvvmTetris.Engine.ViewModels
                 this.Cells[item.X, item.Y] = new CellViewModel();
 
             //--- ブロックに関する変更を処理
-            nextTetrimino
+            this.TetriminoChanged
+                = nextTetrimino
                 .Select(x => Tetrimino.Create(x).Blocks.ToDictionary2(y => y.Position.Row, y => y.Position.Column))
-                .Subscribe(x =>
+                .Do(x =>
                 {
                     //--- ViewPort のオフセット調整
                     //--- ちゃんと書くのがだいぶ面倒臭くなったから無理やりやる
@@ -74,7 +82,8 @@ namespace MvvmTetris.Engine.ViewModels
                                     ?? this.BackgroundColor;
                         item.Element.Color.Value = color;
                     }
-                });
+                })
+                .Select(_ => Unit.Default);
         }
         #endregion
     }
