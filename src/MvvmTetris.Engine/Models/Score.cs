@@ -78,6 +78,7 @@ namespace MvvmTetris.Engine.Models
         {
             switch (count)
             {
+                case 0:  break;
                 case 1:  this.rowCount1.Value++;  break;
                 case 2:  this.rowCount2.Value++;  break;
                 case 3:  this.rowCount3.Value++;  break;
