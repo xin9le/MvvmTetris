@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using MvvmTetris.Collections.Generic;
 using MvvmTetris.Engine.Models;
 using MvvmTetris.Linq;
 using Reactive.Bindings;
