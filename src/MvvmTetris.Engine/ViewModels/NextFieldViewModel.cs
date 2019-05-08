@@ -95,7 +95,7 @@ namespace MvvmTetris.Engine.ViewModels
         /// <returns>初期位置</returns>
         private static Position InitialPosition(TetriminoKind self)
         {
-            var length = self.GetBoundingBoxLength();
+            var length = self.GetBoundingBoxHeight();
             var row = (RowCount - length) / 2;
             var column = (ColumnCount - length) / 2;
             return new Position(row, column);

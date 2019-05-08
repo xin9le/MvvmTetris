@@ -103,7 +103,7 @@ namespace MvvmTetris.Engine.Models
         /// <returns>初期位置</returns>
         public static Position InitialPosition(this TetriminoKind self)
         {
-            var length = self.GetBoundingBoxLength();
+            var length = self.GetBoundingBoxHeight();
             var row = -length;
             var column = (Field.ColumnCount - length) / 2;
             return new Position(row, column);
@@ -111,21 +111,21 @@ namespace MvvmTetris.Engine.Models
 
 
         /// <summary>
-        /// ブロックを囲う最小矩形 (正方形) の一辺の長さを取得します。
+        /// <see cref="Direction.Up"/> なブロックを囲う最小矩形の高さを取得します。
         /// </summary>
         /// <param name="self">テトリミノの種類</param>
         /// <returns>長さ</returns>
-        public static int GetBoundingBoxLength(this TetriminoKind self)
+        public static int GetBoundingBoxHeight(this TetriminoKind self)
         {
             switch (self)
             {
                 case TetriminoKind.I: return 4;
-                case TetriminoKind.O: return 2;
+                case TetriminoKind.O:
                 case TetriminoKind.S:
                 case TetriminoKind.Z:
                 case TetriminoKind.J:
                 case TetriminoKind.L:
-                case TetriminoKind.T: return 3;
+                case TetriminoKind.T: return 2;
                 default: throw new InvalidOperationException("Unknown Tetrimino");
             }
         }
