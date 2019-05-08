@@ -220,7 +220,6 @@ namespace MvvmTetris.Engine.Models
             //--- 更新
             this.Tetrimino.Value = null;  //--- 一旦クリア
             this.PlacedBlocks = result.blocks;
-            this.tetriminoFixed.OnNext(Unit.Default);
 
             //--- 揃った行数を通知
             if (result.removedRowCount > 0)
@@ -231,7 +230,11 @@ namespace MvvmTetris.Engine.Models
             {
                 this.isActivated.Value = false;
                 this.isUpperLimitOvered.Value = true;
+                return;
             }
+
+            //--- 確定通知
+            this.tetriminoFixed.OnNext(Unit.Default);
         }
 
 
