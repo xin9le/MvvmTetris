@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Timers;
 using MvvmTetris.Linq;
 using MvvmTetris.Timers;
@@ -27,6 +28,16 @@ namespace MvvmTetris.Engine.Models
         /// 列数を表します。この値は定数です。
         /// </summary>
         public const byte ColumnCount = 10;
+        #endregion
+
+
+        #region イベント
+        /// <summary>
+        /// ブロックが消されたときに発生します。
+        /// 消された行数が通知されます。
+        /// </summary>
+        public IObservable<int> BlockRemoved => this.blockRemoved;
+        private readonly Subject<int> blockRemoved = new Subject<int>();
         #endregion
 
 
@@ -57,13 +68,6 @@ namespace MvvmTetris.Engine.Models
         /// </summary>
         public IReadOnlyReactiveProperty<bool> IsUpperLimitOvered => this.isUpperLimitOvered;
         private readonly ReactivePropertySlim<bool> isUpperLimitOvered = new ReactivePropertySlim<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
-
-
-        /// <summary>
-        /// 削除した行数を取得します。
-        /// </summary>
-        public IReadOnlyReactiveProperty<int> LastRemovedRowCount => this.lastRemovedRowCount;
-        private readonly ReactivePropertySlim<int> lastRemovedRowCount = new ReactivePropertySlim<int>(mode: ReactivePropertyMode.None);
 
 
         /// <summary>
@@ -129,8 +133,14 @@ namespace MvvmTetris.Engine.Models
             if (direction == MoveDirection.Down)
             {
                 this.Timer.Stop();
-                if (this.Tetrimino.Value.Move(direction, this.CheckCollision))  this.Tetrimino.ForceNotify();
-                else                                                            this.FixTetrimino();
+                if (this.Tetrimino.Value.Move(direction, this.CheckCollision))
+                {
+                    this.Tetrimino.ForceNotify();
+                }
+                else
+                {
+                    this.FixTetrimino();
+                }
                 this.Timer.Start();
                 return;
             }
@@ -164,7 +174,7 @@ namespace MvvmTetris.Engine.Models
                 return;
 
             this.Timer.Stop();
-            while (this.Tetrimino.Value.Move(MoveDirection.Down, this.CheckCollision));  //--- 衝突するまで動かし続ける
+            while (this.Tetrimino.Value.Move(MoveDirection.Down, this.CheckCollision)) ;  //--- 衝突するまで動かし続ける
             this.FixTetrimino();
             this.Timer.Start();
         }
@@ -180,7 +190,7 @@ namespace MvvmTetris.Engine.Models
 
             //--- 揃った行数を通知
             if (result.removedRowCount > 0)
-                this.lastRemovedRowCount.Value = result.removedRowCount;
+                this.blockRemoved.OnNext(result.removedRowCount);
 
             //--- ブロックが上限を超えていたらゲームオーバー
             if (result.blocks.Any(x => x.Position.Row < 0))
@@ -240,7 +250,7 @@ namespace MvvmTetris.Engine.Models
         private (int removedRowCount, Block[] blocks) RemoveAndFixBlock()
         {
             //--- 行ごとにブロックをまとめる
-            var rows    = this.placedBlocks.Value
+            var rows = this.placedBlocks.Value
                         .Concat(this.Tetrimino.Value.Blocks)  //--- 配置済みのブロックとテトリミノを合成
                         .GroupBy(x => x.Position.Row)  //--- 行ごとにまとめる
                         .Select(x =>
@@ -252,7 +262,7 @@ namespace MvvmTetris.Engine.Models
                         .ToArray();
 
             //--- 揃ったブロックを削除して確定
-            var blocks  = rows
+            var blocks = rows
                         .OrderByDescending(x => x.row)    //--- 深い方から並び替え
                         .WithIndex(x => x.isFilled)       //--- 揃っている行が見つかるたびにインクリメント
                         .Where(x => !x.Element.isFilled)  //--- 揃っている行は消す

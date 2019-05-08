@@ -71,7 +71,7 @@ namespace MvvmTetris.Engine.Models
                 this.nextTetrimino.Value = Tetrimino.RandomKind();
                 this.Field.Tetrimino.Value = new Tetrimino(kind, kind.InitialFieldPosition());
             });
-            this.Field.LastRemovedRowCount.Subscribe(this.Score.AddRowCount);
+            this.Field.BlockRemoved.Subscribe(this.Score.AddRowCount);
         }
         #endregion
 
