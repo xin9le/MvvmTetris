@@ -5,7 +5,7 @@ html, body {
     height: 100vh;
 }
 
-.wasm_loading {
+.wasm-loading {
     display: flex;
     flex-direction: column;
     justify-content: center;
