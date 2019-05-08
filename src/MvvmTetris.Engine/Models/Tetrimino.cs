@@ -40,7 +40,9 @@ namespace MvvmTetris.Engine.Models
         /// <summary>
         /// ブロックを取得します。
         /// </summary>
-        public Block[] Blocks { get; private set; }
+        public Block[] Blocks
+            => this.blocks = this.blocks ?? this.Kind.CreateBlock(this.Position, this.Direction);
+        private Block[] blocks = null;
         #endregion
 
 
@@ -60,10 +62,24 @@ namespace MvvmTetris.Engine.Models
         /// <param name="kind">テトリミノの種類</param>
         /// <param name="position">初期位置</param>
         public Tetrimino(TetriminoKind kind, Position position)
+            : this(kind, position, default)
         {
             this.Kind = kind;
             this.Position = position;
-            this.Blocks = kind.CreateBlock(position);
+        }
+
+
+        /// <summary>
+        /// インスタンスを生成します。
+        /// </summary>
+        /// <param name="kind">テトリミノの種類</param>
+        /// <param name="position">初期位置</param>
+        /// <param name="direction">向き</param>
+        private Tetrimino(TetriminoKind kind, Position position, Direction direction)
+        {
+            this.Kind = kind;
+            this.Position = position;
+            this.Direction = direction;
         }
         #endregion
 
@@ -79,6 +95,14 @@ namespace MvvmTetris.Engine.Models
             const int count = 7;  // テトリミノの種類数
             return (TetriminoKind)RandomProvider.ThreadRandom.Next(count);
         }
+
+
+        /// <summary>
+        /// クローンを生成します。
+        /// </summary>
+        /// <returns></returns>
+        public Tetrimino Clone()
+            => new Tetrimino(this.Kind, this.Position, this.Direction);
         #endregion
 
 
@@ -114,7 +138,7 @@ namespace MvvmTetris.Engine.Models
 
             //--- 衝突していない場合は移動状態を保存
             this.Position = position;
-            this.Blocks = blocks;
+            this.blocks = blocks;
             return true;
         }
 
@@ -149,7 +173,7 @@ namespace MvvmTetris.Engine.Models
                 {
                     this.Direction = (Direction)direction;
                     this.Position = position;
-                    this.Blocks = blocks;
+                    this.blocks = blocks;
                     return true;
                 }
             }

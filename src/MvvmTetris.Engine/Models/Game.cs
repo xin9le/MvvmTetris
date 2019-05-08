@@ -41,12 +41,6 @@ namespace MvvmTetris.Engine.Models
         /// </summary>
         public IReadOnlyReactiveProperty<TetriminoKind> NextTetrimino => this.nextTetrimino;
         private readonly ReactivePropertySlim<TetriminoKind> nextTetrimino = new ReactivePropertySlim<TetriminoKind>();
-
-
-        /// <summary>
-        /// 前回のスピードアップ回数を取得または設定します。
-        /// </summary>
-        private int PreviousCount { get; set; }
         #endregion
 
 
@@ -56,22 +50,26 @@ namespace MvvmTetris.Engine.Models
         /// </summary>
         public Game()
         {
-            this.Field.PlacedBlocks.Subscribe(_ =>
+            var speedUpCounter = 0;
+            this.Field.BlockCleared.Subscribe(_ => speedUpCounter = 0);
+            this.Field.BlockRemoved.Subscribe(this.Score.AddRowCount);
+            this.Field.TetriminoFixed.Subscribe(_ =>
             {
-                //--- 10 行消すたびにスピードアップ
-                var count = this.Score.TotalRowCount.Value / 10;
-                if (count > this.PreviousCount)
-                {
-                    this.PreviousCount = count;
-                    this.Field.SpeedUp();
-                }
-
                 //--- 新しいテトリミノを設定
                 var kind = this.nextTetrimino.Value;
                 this.nextTetrimino.Value = Tetrimino.RandomKind();
                 this.Field.Tetrimino.Value = new Tetrimino(kind);
             });
-            this.Field.BlockRemoved.Subscribe(this.Score.AddRowCount);
+            this.Score.TotalRowCount.Subscribe(x =>
+            {
+                //--- 10 行消すたびにスピードアップ
+                var count = x / 10;
+                if (count > speedUpCounter)
+                {
+                    speedUpCounter = count;
+                    this.Field.SpeedUp();
+                }
+            });
         }
         #endregion
 
@@ -83,7 +81,6 @@ namespace MvvmTetris.Engine.Models
         public void Play()
         {
             this.Field.Reset();
-            this.PreviousCount = 0;
             this.nextTetrimino.Value = Tetrimino.RandomKind();
             this.Field.Start(Tetrimino.RandomKind());
             this.Score.Clear();

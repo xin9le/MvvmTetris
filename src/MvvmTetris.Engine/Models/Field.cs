@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Timers;
@@ -33,20 +33,47 @@ namespace MvvmTetris.Engine.Models
 
         #region イベント
         /// <summary>
+        /// テトリミノが移動されたときに発生します。
+        /// </summary>
+        public IObservable<Unit> TetriminoMoved => this.tetriminoMoved;
+        private readonly Subject<Unit> tetriminoMoved = new Subject<Unit>();
+
+
+        /// <summary>
+        /// テトリミノが回転されたときに発生します。
+        /// </summary>
+        public IObservable<Unit> TetriminoRotated => this.tetriminoRotated;
+        private readonly Subject<Unit> tetriminoRotated = new Subject<Unit>();
+
+
+        /// <summary>
+        /// テトリミノが確定されたときに発生します。
+        /// </summary>
+        public IObservable<Unit> TetriminoFixed => this.tetriminoFixed;
+        private readonly Subject<Unit> tetriminoFixed = new Subject<Unit>();
+
+
+        /// <summary>
         /// ブロックが消されたときに発生します。
         /// 消された行数が通知されます。
         /// </summary>
         public IObservable<int> BlockRemoved => this.blockRemoved;
         private readonly Subject<int> blockRemoved = new Subject<int>();
+
+
+        /// <summary>
+        /// ブロックがクリアされたときに発生します。
+        /// </summary>
+        public IObservable<Unit> BlockCleared => this.blockCleared;
+        private readonly Subject<Unit> blockCleared = new Subject<Unit>();
         #endregion
 
 
         #region プロパティ
         /// <summary>
-        /// 置かれているブロックのコレクションを取得します。
+        /// 配置済みブロックのコレクションを取得します。
         /// </summary>
-        public IReadOnlyReactiveProperty<Block[]> PlacedBlocks => this.placedBlocks;
-        private readonly ReactivePropertySlim<Block[]> placedBlocks = new ReactivePropertySlim<Block[]>(Array.Empty<Block>(), ReactivePropertyMode.RaiseLatestValueOnSubscribe);
+        public Block[] PlacedBlocks { get; private set; } = Array.Empty<Block>();
 
 
         /// <summary>
@@ -116,7 +143,8 @@ namespace MvvmTetris.Engine.Models
             this.isActivated.Value = false;
             this.isUpperLimitOvered.Value = false;
             this.Tetrimino.Value = null;
-            this.placedBlocks.Value = Array.Empty<Block>();
+            this.PlacedBlocks = Array.Empty<Block>();
+            this.blockCleared.OnNext(Unit.Default);
         }
 
 
@@ -135,7 +163,7 @@ namespace MvvmTetris.Engine.Models
                 this.Timer.Stop();
                 if (this.Tetrimino.Value.Move(direction, this.CheckCollision))
                 {
-                    this.Tetrimino.ForceNotify();
+                    this.tetriminoMoved.OnNext(Unit.Default);
                 }
                 else
                 {
@@ -147,7 +175,7 @@ namespace MvvmTetris.Engine.Models
 
             //--- 左右移動の場合は移動に成功したら変更通知
             if (this.Tetrimino.Value.Move(direction, this.CheckCollision))
-                this.Tetrimino.ForceNotify();
+                this.tetriminoMoved.OnNext(Unit.Default);
         }
 
 
@@ -161,7 +189,7 @@ namespace MvvmTetris.Engine.Models
                 return;
 
             if (this.Tetrimino.Value.Rotation(direction, this.CheckCollision))
-                this.Tetrimino.ForceNotify();
+                this.tetriminoRotated.OnNext(Unit.Default);
         }
 
 
@@ -175,6 +203,7 @@ namespace MvvmTetris.Engine.Models
 
             this.Timer.Stop();
             while (this.Tetrimino.Value.Move(MoveDirection.Down, this.CheckCollision)) ;  //--- 衝突するまで動かし続ける
+            this.tetriminoMoved.OnNext(Unit.Default);
             this.FixTetrimino();
             this.Timer.Start();
         }
@@ -188,6 +217,11 @@ namespace MvvmTetris.Engine.Models
             //--- テトリミノを配置済みとして確定し、ブロックが揃ってたら消す
             var result = this.RemoveAndFixBlock();
 
+            //--- 更新
+            this.Tetrimino.Value = null;  //--- 一旦クリア
+            this.PlacedBlocks = result.blocks;
+            this.tetriminoFixed.OnNext(Unit.Default);
+
             //--- 揃った行数を通知
             if (result.removedRowCount > 0)
                 this.blockRemoved.OnNext(result.removedRowCount);
@@ -197,12 +231,7 @@ namespace MvvmTetris.Engine.Models
             {
                 this.isActivated.Value = false;
                 this.isUpperLimitOvered.Value = true;
-                return;
             }
-
-            //--- 更新
-            this.Tetrimino.Value = null;  //--- 一旦クリア
-            this.placedBlocks.Value = result.blocks;
         }
 
 
@@ -239,7 +268,7 @@ namespace MvvmTetris.Engine.Models
                 return true;
 
             //--- すでに配置済みブロックがある
-            return this.placedBlocks.Value.Any(x => x.Position == block.Position);
+            return this.PlacedBlocks.Any(x => x.Position == block.Position);
         }
 
 
@@ -250,37 +279,39 @@ namespace MvvmTetris.Engine.Models
         private (int removedRowCount, Block[] blocks) RemoveAndFixBlock()
         {
             //--- 行ごとにブロックをまとめる
-            var rows = this.placedBlocks.Value
-                        .Concat(this.Tetrimino.Value.Blocks)  //--- 配置済みのブロックとテトリミノを合成
-                        .GroupBy(x => x.Position.Row)  //--- 行ごとにまとめる
-                        .Select(x =>
-                        (
-                            row: x.Key,
-                            isFilled: ColumnCount <= x.Count(),  //--- 揃っているか
-                            blocks: x
-                        ))
-                        .ToArray();
+            var rows
+                = this.PlacedBlocks
+                .Concat(this.Tetrimino.Value.Blocks)  //--- 配置済みのブロックとテトリミノを合成
+                .GroupBy(x => x.Position.Row)  //--- 行ごとにまとめる
+                .Select(x =>
+                (
+                    row: x.Key,
+                    isFilled: ColumnCount <= x.Count(),  //--- 揃っているか
+                    blocks: x
+                ))
+                .ToArray();
 
             //--- 揃ったブロックを削除して確定
-            var blocks = rows
-                        .OrderByDescending(x => x.row)    //--- 深い方から並び替え
-                        .WithIndex(x => x.isFilled)       //--- 揃っている行が見つかるたびにインクリメント
-                        .Where(x => !x.Element.isFilled)  //--- 揃っている行は消す
-                        .SelectMany(x =>
-                        {
-                            //--- ズラす必要がない行はそのまま処理
-                            //--- 処理パフォーマンス向上のため特別処理
-                            if (x.Index == 0)
-                                return x.Element.blocks;
+            var blocks
+                = rows
+                .OrderByDescending(x => x.row)    //--- 深い方から並び替え
+                .WithIndex(x => x.isFilled)       //--- 揃っている行が見つかるたびにインクリメント
+                .Where(x => !x.Element.isFilled)  //--- 揃っている行は消す
+                .SelectMany(x =>
+                {
+                    //--- ズラす必要がない行はそのまま処理
+                    //--- 処理パフォーマンス向上のため特別処理
+                    if (x.Index == 0)
+                        return x.Element.blocks;
 
-                            //--- 消えた行のぶん下に段をズラす
-                            return x.Element.blocks.Select(y =>
-                            {
-                                var position = new Position(y.Position.Row + x.Index, y.Position.Column);
-                                return new Block(y.Color, position);
-                            });
-                        })
-                        .ToArray();
+                    //--- 消えた行のぶん下に段をズラす
+                    return x.Element.blocks.Select(y =>
+                    {
+                        var position = new Position(y.Position.Row + x.Index, y.Position.Column);
+                        return new Block(y.Color, position);
+                    });
+                })
+                .ToArray();
 
             //--- 削除した行数
             var removedRowCount = rows.Count(x => x.isFilled);
