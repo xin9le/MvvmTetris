@@ -69,7 +69,7 @@ namespace MvvmTetris.Engine.Models
                 //--- 新しいテトリミノを設定
                 var kind = this.nextTetrimino.Value;
                 this.nextTetrimino.Value = Tetrimino.RandomKind();
-                this.Field.Tetrimino.Value = new Tetrimino(kind, kind.InitialFieldPosition());
+                this.Field.Tetrimino.Value = new Tetrimino(kind);
             });
             this.Field.BlockRemoved.Subscribe(this.Score.AddRowCount);
         }

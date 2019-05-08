@@ -49,6 +49,15 @@ namespace MvvmTetris.Engine.Models
         /// インスタンスを生成します。
         /// </summary>
         /// <param name="kind">テトリミノの種類</param>
+        public Tetrimino(TetriminoKind kind)
+            : this(kind, kind.InitialPosition())
+        {}
+
+
+        /// <summary>
+        /// インスタンスを生成します。
+        /// </summary>
+        /// <param name="kind">テトリミノの種類</param>
         /// <param name="position">初期位置</param>
         public Tetrimino(TetriminoKind kind, Position position)
         {

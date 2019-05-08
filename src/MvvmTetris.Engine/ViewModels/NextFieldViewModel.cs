@@ -74,7 +74,7 @@ namespace MvvmTetris.Engine.ViewModels
                         c.Color.Value = this.BackgroundColor;
 
                     //--- ブロック部分に色を塗る
-                    var tetrimino = new Tetrimino(x, x.InitialNextFieldPosition());
+                    var tetrimino = new Tetrimino(x, InitialPosition(x));
                     foreach (var b in tetrimino.Blocks)
                     {
                         var p = b.Position;
@@ -83,6 +83,22 @@ namespace MvvmTetris.Engine.ViewModels
                 })
                 .Select(_ => Unit.Default)
                 .ToReadOnlyReactivePropertySlim(mode: ReactivePropertyMode.None);  // subscribe and fire changed
+        }
+        #endregion
+
+
+        #region 補助
+        /// <summary>
+        /// 次の場におけるブロックの初期位置を取得します。
+        /// </summary>
+        /// <param name="self">テトリミノの種類</param>
+        /// <returns>初期位置</returns>
+        private static Position InitialPosition(TetriminoKind self)
+        {
+            var length = self.GetBoundingBoxLength();
+            var row = (RowCount - length) / 2;
+            var column = (ColumnCount - length) / 2;
+            return new Position(row, column);
         }
         #endregion
     }

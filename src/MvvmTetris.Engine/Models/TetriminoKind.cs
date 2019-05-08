@@ -73,7 +73,7 @@ namespace MvvmTetris.Engine.Models
     /// <summary>
     /// テトリミノの種類の拡張機能を提供します。
     /// </summary>
-    public static class TetriminoExtensions
+    internal static class TetriminoExtensions
     {
         /// <summary>
         /// ブロックの色を取得します。
@@ -101,7 +101,7 @@ namespace MvvmTetris.Engine.Models
         /// </summary>
         /// <param name="self">テトリミノの種類</param>
         /// <returns>初期位置</returns>
-        public static Position InitialFieldPosition(this TetriminoKind self)
+        public static Position InitialPosition(this TetriminoKind self)
         {
             var length = self.GetBoundingBoxLength();
             var row = -length;
@@ -111,28 +111,11 @@ namespace MvvmTetris.Engine.Models
 
 
         /// <summary>
-        /// 次の場におけるブロックの初期位置を取得します。
-        /// </summary>
-        /// <param name="self">テトリミノの種類</param>
-        /// <returns>初期位置</returns>
-        public static Position InitialNextFieldPosition(this TetriminoKind self)
-        {
-            const int nextFieldRowCount = 5;
-            const int nextFieldColumnCount = 5;
-
-            var length = self.GetBoundingBoxLength();
-            var row = (nextFieldRowCount - length) / 2;
-            var column = (nextFieldColumnCount - length) / 2;
-            return new Position(row, column);
-        }
-
-
-        /// <summary>
         /// ブロックを囲う最小矩形 (正方形) の一辺の長さを取得します。
         /// </summary>
         /// <param name="self">テトリミノの種類</param>
         /// <returns>長さ</returns>
-        private static int GetBoundingBoxLength(this TetriminoKind self)
+        public static int GetBoundingBoxLength(this TetriminoKind self)
         {
             switch (self)
             {

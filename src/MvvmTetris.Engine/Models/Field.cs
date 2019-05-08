@@ -101,7 +101,7 @@ namespace MvvmTetris.Engine.Models
         {
             this.Reset();
             this.isActivated.Value = true;
-            this.Tetrimino.Value = new Tetrimino(kind, kind.InitialFieldPosition());
+            this.Tetrimino.Value = new Tetrimino(kind);
             this.Timer.Start();
         }
 
