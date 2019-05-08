@@ -80,6 +80,16 @@
         /// <returns>等価であればtrue</returns>
         public static bool operator !=(Position left, Position right)
             => !(left == right);
+
+
+        /// <summary>
+        /// + 演算子を定義します。
+        /// </summary>
+        /// <param name="left">左辺</param>
+        /// <param name="right">右辺</param>
+        /// <returns>等価であればtrue</returns>
+        public static Position operator +(Position left, Position right)
+            => new Position(left.Row + right.Row, left.Column + right.Column);
         #endregion
     }
 }

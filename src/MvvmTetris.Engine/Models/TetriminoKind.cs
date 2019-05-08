@@ -98,28 +98,54 @@ namespace MvvmTetris.Engine.Models
 
 
         /// <summary>
-        /// ブロックの初期位置を取得します。
+        /// 場におけるブロックの初期位置を取得します。
         /// </summary>
         /// <param name="self">テトリミノの種類</param>
         /// <returns>初期位置</returns>
-        public static Position InitialPosition(this TetriminoKind self)
+        public static Position InitialFieldPosition(this TetriminoKind self)
         {
-            int length = 0;
+            var length = self.GetBoundingBoxLength();
+            var row = -length;
+            var column = (Field.ColumnCount - length) / 2;
+            return new Position(row, column);
+        }
+
+
+        /// <summary>
+        /// 次の場におけるブロックの初期位置を取得します。
+        /// </summary>
+        /// <param name="self">テトリミノの種類</param>
+        /// <returns>初期位置</returns>
+        public static Position InitialNextFieldPosition(this TetriminoKind self)
+        {
+            const int nextFieldRowCount = 5;
+            const int nextFieldColumnCount = 5;
+
+            var length = self.GetBoundingBoxLength();
+            var row = (nextFieldRowCount - length) / 2;
+            var column = (nextFieldColumnCount - length) / 2;
+            return new Position(row, column);
+        }
+
+
+        /// <summary>
+        /// ブロックを囲う最小矩形 (正方形) の一辺の長さを取得します。
+        /// </summary>
+        /// <param name="self">テトリミノの種類</param>
+        /// <returns>長さ</returns>
+        private static int GetBoundingBoxLength(this TetriminoKind self)
+        {
             switch (self)
             {
-                case TetriminoKind.I:   length = 4; break;
-                case TetriminoKind.O:   length = 2; break;
+                case TetriminoKind.I: return 4;
+                case TetriminoKind.O: return 2;
                 case TetriminoKind.S:
                 case TetriminoKind.Z:
                 case TetriminoKind.J:
                 case TetriminoKind.L:
-                case TetriminoKind.T:   length = 3; break;
-                default:    throw new InvalidOperationException("Unknown Tetrimino");
+                case TetriminoKind.T: return 3;
+                default: throw new InvalidOperationException("Unknown Tetrimino");
             }
-
-            var row = -length;
-            var column = (Field.ColumnCount - length) / 2;
-            return new Position(row, column);
         }
 
 

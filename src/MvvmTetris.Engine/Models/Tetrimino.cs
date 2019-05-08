@@ -50,11 +50,12 @@ namespace MvvmTetris.Engine.Models
         /// インスタンスを生成します。
         /// </summary>
         /// <param name="kind">テトリミノの種類</param>
-        private Tetrimino(TetriminoKind kind)
+        /// <param name="position">初期位置</param>
+        public Tetrimino(TetriminoKind kind, Position position)
         {
             this.Kind = kind;
-            this.Position = kind.InitialPosition();
-            this.Blocks = kind.CreateBlock(this.Position);
+            this.Position = position;
+            this.Blocks = kind.CreateBlock(position);
         }
         #endregion
 
@@ -66,19 +67,9 @@ namespace MvvmTetris.Engine.Models
         /// <returns>テトリミノの種類</returns>
         public static TetriminoKind RandomKind()
         {
-            var length = Enum.GetValues(typeof(TetriminoKind)).Length;
-            return (TetriminoKind)RandomProvider.ThreadRandom.Next(length);
-        }
-
-
-        /// <summary>
-        /// テトリミノを生成します。
-        /// </summary>
-        /// <returns>インスタンス</returns>
-        public static Tetrimino Create(TetriminoKind? kind = null)
-        {
-            kind = kind ?? RandomKind();
-            return new Tetrimino(kind.Value);
+            //var count = Enum.GetValues(typeof(TetriminoKind)).Length;
+            const int count = 7;  // テトリミノの種類数
+            return (TetriminoKind)RandomProvider.ThreadRandom.Next(count);
         }
         #endregion
 

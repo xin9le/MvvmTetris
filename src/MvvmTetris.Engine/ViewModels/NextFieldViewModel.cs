@@ -68,26 +68,18 @@ namespace MvvmTetris.Engine.ViewModels
             //--- ブロックに関する変更を処理
             this.Changed
                 = nextTetrimino
-                .Select(x => Tetrimino.Create(x).Blocks.ToDictionary2
-                (
-                    y => y.Position.Row,
-                    y => y.Position.Column,
-                    y => (Block?)y
-                ))
                 .Do(x =>
                 {
-                    //--- ViewPort のオフセット調整
-                    //--- ちゃんと書くのがだいぶ面倒臭くなったから無理やりやる
-                    var offset = new Position((-6 - x.Count) / 2, 2);
+                    //--- 一旦クリア
+                    foreach (var c in this.Cells)
+                        c.Color.Value = this.BackgroundColor;
 
-                    //--- 適用
-                    foreach (var item in this.Cells.WithIndex())
+                    //--- ブロック部分に色を塗る
+                    var tetrimino = new Tetrimino(x, x.InitialNextFieldPosition());
+                    foreach (var b in tetrimino.Blocks)
                     {
-                        var color = x.GetValueOrDefault(item.X + offset.Row)
-                                    ?.GetValueOrDefault(item.Y + offset.Column)
-                                    ?.Color
-                                    ?? this.BackgroundColor;
-                        item.Element.Color.Value = color;
+                        var p = b.Position;
+                        this.Cells[p.Row, p.Column].Color.Value = b.Color;
                     }
                 })
                 .Select(_ => Unit.Default)

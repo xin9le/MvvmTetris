@@ -92,12 +92,12 @@ namespace MvvmTetris.Engine.Models
         /// <summary>
         /// 開始します。
         /// </summary>
-        /// <param name="initial">最初のテトリミノの種類</param>
-        public void Start(TetriminoKind initial)
+        /// <param name="kind">最初のテトリミノの種類</param>
+        public void Start(TetriminoKind kind)
         {
             this.Reset();
             this.isActivated.Value = true;
-            this.Tetrimino.Value = Models.Tetrimino.Create(initial);
+            this.Tetrimino.Value = new Tetrimino(kind, kind.InitialFieldPosition());
             this.Timer.Start();
         }
 
