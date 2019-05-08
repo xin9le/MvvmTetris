@@ -1,3 +1,26 @@
 @inherits LayoutComponentBase
 
-@Body
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">MvvmTetris</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav_contents" aria-controls="nav_contents" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav_contents">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/xin9le/MvvmTetris">GitHub</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main>
+    @this.Body
+</main>
+
+<footer>
+    &copy; <a href="https://twitter.com/xin9le">xin9le</a>
+</footer>
