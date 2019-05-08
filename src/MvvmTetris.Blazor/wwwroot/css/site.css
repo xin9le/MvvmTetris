@@ -15,6 +15,9 @@ html, body {
 }
 
 table.field {
+    border: solid;
+    border-color: lightgray;
+    border-width: thin;
 }
 
     table.field tr {
