@@ -22,28 +22,28 @@ namespace MvvmTetris.Engine.Models
         /// 1 行で消した回数を取得します。
         /// </summary>
         public IReadOnlyReactiveProperty<int> RowCount1 => this.rowCount1;
-        private readonly ReactiveProperty<int> rowCount1 = new ReactiveProperty<int>();
+        private readonly ReactivePropertySlim<int> rowCount1 = new ReactivePropertySlim<int>();
 
 
         /// <summary>
         /// 2 行で消した回数を取得します。
         /// </summary>
         public IReadOnlyReactiveProperty<int> RowCount2 => this.rowCount2;
-        private readonly ReactiveProperty<int> rowCount2 = new ReactiveProperty<int>();
+        private readonly ReactivePropertySlim<int> rowCount2 = new ReactivePropertySlim<int>();
 
 
         /// <summary>
         /// 3 行で消した回数を取得します。
         /// </summary>
         public IReadOnlyReactiveProperty<int> RowCount3 => this.rowCount3;
-        private readonly ReactiveProperty<int> rowCount3 = new ReactiveProperty<int>();
+        private readonly ReactivePropertySlim<int> rowCount3 = new ReactivePropertySlim<int>();
 
 
         /// <summary>
         /// 4 行で消した回数を取得します。
         /// </summary>
         public IReadOnlyReactiveProperty<int> RowCount4 => this.rowCount4;
-        private readonly ReactiveProperty<int> rowCount4 = new ReactiveProperty<int>();
+        private readonly ReactivePropertySlim<int> rowCount4 = new ReactivePropertySlim<int>();
         #endregion
 
 
@@ -64,7 +64,7 @@ namespace MvvmTetris.Engine.Models
                                     +   x3 * 3
                                     +   x4 * 4
                 )
-                .ToReadOnlyReactiveProperty();
+                .ToReadOnlyReactivePropertySlim();
         }
         #endregion
 

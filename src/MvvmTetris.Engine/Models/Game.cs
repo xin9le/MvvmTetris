@@ -40,7 +40,7 @@ namespace MvvmTetris.Engine.Models
         /// 次に出現するテトリミノを取得します。
         /// </summary>
         public IReadOnlyReactiveProperty<TetriminoKind> NextTetrimino => this.nextTetrimino;
-        private readonly ReactiveProperty<TetriminoKind> nextTetrimino = new ReactiveProperty<TetriminoKind>();
+        private readonly ReactivePropertySlim<TetriminoKind> nextTetrimino = new ReactivePropertySlim<TetriminoKind>();
 
 
         /// <summary>

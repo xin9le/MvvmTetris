@@ -35,20 +35,20 @@ namespace MvvmTetris.Engine.Models
         /// 置かれているブロックのコレクションを取得します。
         /// </summary>
         public IReadOnlyReactiveProperty<IReadOnlyList<Block>> PlacedBlocks => this.placedBlocks;
-        private readonly ReactiveProperty<IReadOnlyList<Block>> placedBlocks = new ReactiveProperty<IReadOnlyList<Block>>(Array.Empty<Block>(), ReactivePropertyMode.RaiseLatestValueOnSubscribe);
+        private readonly ReactivePropertySlim<IReadOnlyList<Block>> placedBlocks = new ReactivePropertySlim<IReadOnlyList<Block>>(Array.Empty<Block>(), ReactivePropertyMode.RaiseLatestValueOnSubscribe);
 
 
         /// <summary>
         /// 現在動かしているテトリミノを取得または設定します。
         /// </summary>
-        public ReactiveProperty<Tetrimino> Tetrimino { get; } = new ReactiveProperty<Tetrimino>();
+        public ReactivePropertySlim<Tetrimino> Tetrimino { get; } = new ReactivePropertySlim<Tetrimino>();
 
 
         /// <summary>
         /// アクティブ状態かどうかを取得します。
         /// </summary>
         public IReadOnlyReactiveProperty<bool> IsActivated => this.isActivated;
-        private readonly ReactiveProperty<bool> isActivated = new ReactiveProperty<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
+        private readonly ReactivePropertySlim<bool> isActivated = new ReactivePropertySlim<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
 
 
 
@@ -56,14 +56,14 @@ namespace MvvmTetris.Engine.Models
         /// 上限ラインを超えているかどうかを取得します。
         /// </summary>
         public IReadOnlyReactiveProperty<bool> IsUpperLimitOvered => this.isUpperLimitOvered;
-        private readonly ReactiveProperty<bool> isUpperLimitOvered = new ReactiveProperty<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
+        private readonly ReactivePropertySlim<bool> isUpperLimitOvered = new ReactivePropertySlim<bool>(mode: ReactivePropertyMode.DistinctUntilChanged);
 
 
         /// <summary>
         /// 削除した行数を取得します。
         /// </summary>
         public IReadOnlyReactiveProperty<int> LastRemovedRowCount => this.lastRemovedRowCount;
-        private readonly ReactiveProperty<int> lastRemovedRowCount = new ReactiveProperty<int>(mode: ReactivePropertyMode.None);
+        private readonly ReactivePropertySlim<int> lastRemovedRowCount = new ReactivePropertySlim<int>(mode: ReactivePropertyMode.None);
 
 
         /// <summary>

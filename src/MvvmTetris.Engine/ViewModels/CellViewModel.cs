@@ -14,7 +14,7 @@ namespace MvvmTetris.Engine.ViewModels
         /// <summary>
         /// 色を取得します。
         /// </summary>
-        public ReactiveProperty<Color> Color { get; } = new ReactiveProperty<Color>();
+        public ReactivePropertySlim<Color> Color { get; } = new ReactivePropertySlim<Color>();
         #endregion
     }
 }

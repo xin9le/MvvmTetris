@@ -86,7 +86,7 @@ namespace MvvmTetris.Engine.ViewModels
                     }
                 })
                 .Select(_ => Unit.Default)
-                .ToReadOnlyReactiveProperty(mode: ReactivePropertyMode.None);  // subscribe and fire changed
+                .ToReadOnlyReactivePropertySlim(mode: ReactivePropertyMode.None);  // subscribe and fire changed
         }
         #endregion
     }
