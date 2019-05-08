@@ -18,16 +18,16 @@ html, body {
     width: 600px;
 }
 
-table.field {
+.field {
     border: solid;
     border-color: lightgray;
     border-width: thin;
 }
 
-    table.field tr {
+    .field tr {
         height: 30px;
     }
 
-    table.field td {
+    .field td {
         width: 30px;
     }
