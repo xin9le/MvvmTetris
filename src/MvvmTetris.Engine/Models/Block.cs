@@ -29,7 +29,7 @@ namespace MvvmTetris.Engine.Models
         /// </summary>
         /// <param name="color">ブロックの色</param>
         /// <param name="position">ブロックの位置</param>
-        public Block(Color color, Position position)
+        public Block(in Color color, in Position position)
         {
             this.Color = color;
             this.Position = position;
