@@ -156,7 +156,7 @@ namespace MvvmTetris.Engine.Models
         /// <param name="offset">絶対座標への移動分</param>
         /// <param name="direction">方向</param>
         /// <returns>ブロックのコレクション</returns>
-        public static IReadOnlyList<Block> CreateBlock(this TetriminoKind self, Position offset, Direction direction = Direction.Up)
+        public static Block[] CreateBlock(this TetriminoKind self, Position offset, Direction direction = Direction.Up)
         {
             //--- ブロック形状をビットで表現
             //--- ベタ書きだけど、これが最も分かりやすく高速

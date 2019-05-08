@@ -41,7 +41,7 @@ namespace MvvmTetris.Engine.Models
         /// <summary>
         /// ブロックを取得します。
         /// </summary>
-        public IReadOnlyList<Block> Blocks { get; private set; }
+        public Block[] Blocks { get; private set; }
         #endregion
 
 
