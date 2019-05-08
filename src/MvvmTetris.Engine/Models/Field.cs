@@ -45,8 +45,8 @@ namespace MvvmTetris.Engine.Models
         /// <summary>
         /// 置かれているブロックのコレクションを取得します。
         /// </summary>
-        public IReadOnlyReactiveProperty<IReadOnlyList<Block>> PlacedBlocks => this.placedBlocks;
-        private readonly ReactivePropertySlim<IReadOnlyList<Block>> placedBlocks = new ReactivePropertySlim<IReadOnlyList<Block>>(Array.Empty<Block>(), ReactivePropertyMode.RaiseLatestValueOnSubscribe);
+        public IReadOnlyReactiveProperty<Block[]> PlacedBlocks => this.placedBlocks;
+        private readonly ReactivePropertySlim<Block[]> placedBlocks = new ReactivePropertySlim<Block[]>(Array.Empty<Block>(), ReactivePropertyMode.RaiseLatestValueOnSubscribe);
 
 
         /// <summary>
