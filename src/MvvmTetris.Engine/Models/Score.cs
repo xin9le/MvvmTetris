@@ -9,7 +9,7 @@ namespace MvvmTetris.Engine.Models
     /// <summary>
     /// ゲームの記録を表します。
     /// </summary>
-    public class Score
+    internal class Score
     {
         #region プロパティ
         /// <summary>

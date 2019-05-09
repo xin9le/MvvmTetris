@@ -53,7 +53,7 @@ namespace MvvmTetris.Engine.ViewModels
         /// インスタンスを生成します。
         /// </summary>
         /// <param name="score">ゲームスコア</param>
-        public ScoreViewModel(Score score)
+        internal ScoreViewModel(Score score)
             => this.Score = score;
         #endregion
     }

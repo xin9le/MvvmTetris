@@ -3,7 +3,7 @@
     /// <summary>
     /// 座標を表します。
     /// </summary>
-    public readonly struct Position
+    internal readonly struct Position
     {
         #region プロパティ
         /// <summary>

@@ -57,7 +57,7 @@ namespace MvvmTetris.Engine.ViewModels
         /// インスタンスを生成します。
         /// </summary>
         /// <param name="nextTetrimino">次のテトリミノ</param>
-        public NextFieldViewModel(IObservable<TetriminoKind> nextTetrimino)
+        internal NextFieldViewModel(IObservable<TetriminoKind> nextTetrimino)
         {
             //--- 描画するセルを準備
             this.Cells = new CellViewModel[RowCount, ColumnCount];

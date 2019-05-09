@@ -10,7 +10,7 @@ namespace MvvmTetris.Engine.Models
     /// <summary>
     /// テトリミノとしての機能を提供します。
     /// </summary>
-    public class Tetrimino
+    internal class Tetrimino
     {
         #region プロパティ
         /// <summary>

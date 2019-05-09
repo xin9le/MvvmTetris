@@ -57,7 +57,7 @@ namespace MvvmTetris.Engine.ViewModels
         /// <summary>
         /// インスタンスを生成します。
         /// </summary>
-        public FieldViewModel(Field field)
+        internal FieldViewModel(Field field)
         {
             this.Field = field;
 

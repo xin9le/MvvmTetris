@@ -3,7 +3,7 @@
     /// <summary>
     /// 方向を表します。
     /// </summary>
-    public enum Direction
+    internal enum Direction
     {
         /// <summary>
         /// 上向き

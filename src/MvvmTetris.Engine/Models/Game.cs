@@ -9,7 +9,7 @@ namespace MvvmTetris.Engine.Models
     /// <summary>
     /// ゲーム本体を表します。
     /// </summary>
-    public class Game
+    internal class Game
     {
         #region プロパティ
         /// <summary>

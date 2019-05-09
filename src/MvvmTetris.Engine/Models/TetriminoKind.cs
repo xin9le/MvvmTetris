@@ -9,7 +9,7 @@ namespace MvvmTetris.Engine.Models
     /// <summary>
     /// テトリミノの種類を表します。
     /// </summary>
-    public enum TetriminoKind
+    internal enum TetriminoKind
     {
         /// <summary>
         /// <para>□■□□</para>

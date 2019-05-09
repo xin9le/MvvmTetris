@@ -15,7 +15,7 @@ namespace MvvmTetris.Engine.Models
     /// <summary>
     /// テトリスの場としての機能を提供します。
     /// </summary>
-    public class Field
+    internal class Field
     {
         #region 定数
         /// <summary>
