@@ -36,6 +36,12 @@ namespace MvvmTetris.Engine.ViewModels
 
 
         /// <summary>
+        /// コマンド管理機構を取得します。
+        /// </summary>
+        public CommandManager CommandManager { get; }
+
+
+        /// <summary>
         /// プレイ中かどうかを取得します。
         /// </summary>
         public IReadOnlyReactiveProperty<bool> IsPlaying => this.Game.IsPlaying;
@@ -57,15 +63,8 @@ namespace MvvmTetris.Engine.ViewModels
             this.Score = new ScoreViewModel(this.Game.Score);
             this.Field = new FieldViewModel(this.Game.Field);
             this.NextField = new NextFieldViewModel(this.Game.NextTetrimino);
+            this.CommandManager = new CommandManager(this.Game);
         }
-        #endregion
-
-
-        #region 操作
-        /// <summary>
-        /// ゲームを開始します。
-        /// </summary>
-        public void Play() => this.Game.Play();
         #endregion
     }
 }

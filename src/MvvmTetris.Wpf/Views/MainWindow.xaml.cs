@@ -40,7 +40,7 @@ namespace MvvmTetris.Wpf.Views
             SetupField(this.field, this.Game.Field.Cells, 30);
             SetupField(this.nextField, this.Game.NextField.Cells, 18);
             this.SetupKeyEvents();
-            this.Game.Play();
+            this.Game.CommandManager.Execute(Command.Play);
         }
         #endregion
 
@@ -91,16 +91,17 @@ namespace MvvmTetris.Wpf.Views
         {
             this.KeyDown += (s, e) =>
             {
+                var manager = this.Game.CommandManager;
                 switch (e.Key)
                 {
-                    case Key.Z: this.Game.Field.RotationTetrimino(RotationDirection.Left); break;
-                    case Key.X: this.Game.Field.RotationTetrimino(RotationDirection.Right); break;
-                    case Key.Up: this.Game.Field.RotationTetrimino(RotationDirection.Right); break;
-                    case Key.Right: this.Game.Field.MoveTetrimino(MoveDirection.Right); break;
-                    case Key.Down: this.Game.Field.MoveTetrimino(MoveDirection.Down); break;
-                    case Key.Left: this.Game.Field.MoveTetrimino(MoveDirection.Left); break;
-                    case Key.Escape: this.Game.Play(); break;
-                    case Key.Space: this.Game.Field.ForceFixTetrimino(); break;
+                    case Key.Z: manager.Execute(Command.RotateLeft); break;
+                    case Key.X: manager.Execute(Command.RotateRight); break;
+                    case Key.Up: manager.Execute(Command.RotateRight); break;
+                    case Key.Right: manager.Execute(Command.MoveRight); break;
+                    case Key.Down: manager.Execute(Command.MoveDown); break;
+                    case Key.Left: manager.Execute(Command.MoveLeft); break;
+                    case Key.Escape: manager.Execute(Command.Play); break;
+                    case Key.Space: manager.Execute(Command.ForceFix); break;
                 }
             };
         }

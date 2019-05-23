@@ -145,27 +145,5 @@ namespace MvvmTetris.Engine.ViewModels
             });
         }
         #endregion
-
-
-        #region 操作
-        /// <summary>
-        /// 指定された方向にテトリミノを移動させます。
-        /// </summary>
-        /// <param name="direction">移動方向</param>
-        public void MoveTetrimino(MoveDirection direction) => this.Field.MoveTetrimino(direction);
-
-
-        /// <summary>
-        /// 指定された方向にテトリミノを回転させます。
-        /// </summary>
-        /// <param name="direction">回転方向</param>
-        public void RotationTetrimino(RotationDirection direction) => this.Field.RotationTetrimino(direction);
-
-
-        /// <summary>
-        /// テトリミノを強制的に確定させます。
-        /// </summary>
-        public void ForceFixTetrimino() => this.Field.ForceFixTetrimino();
-        #endregion
     }
 }
