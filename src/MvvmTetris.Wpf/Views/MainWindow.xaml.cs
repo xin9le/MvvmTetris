@@ -39,8 +39,8 @@ namespace MvvmTetris.Wpf.Views
             this.InitializeComponent();
             SetupField(this.field, this.Game.Field.Cells, 30);
             SetupField(this.nextField, this.Game.NextField.Cells, 18);
-            this.SetupKeyEvents();
-            this.Game.CommandManager.Execute(Command.Play);
+            this.SetupEvents();
+            this.Game.InputCommand.Execute(Command.Play);
         }
         #endregion
 
@@ -87,21 +87,21 @@ namespace MvvmTetris.Wpf.Views
         /// <summary>
         /// イベントの関連付けを行います。
         /// </summary>
-        private void SetupKeyEvents()
+        private void SetupEvents()
         {
             this.KeyDown += (s, e) =>
             {
-                var manager = this.Game.CommandManager;
+                var x = this.Game.InputCommand;
                 switch (e.Key)
                 {
-                    case Key.Z: manager.Execute(Command.RotateLeft); break;
-                    case Key.X: manager.Execute(Command.RotateRight); break;
-                    case Key.Up: manager.Execute(Command.RotateRight); break;
-                    case Key.Right: manager.Execute(Command.MoveRight); break;
-                    case Key.Down: manager.Execute(Command.MoveDown); break;
-                    case Key.Left: manager.Execute(Command.MoveLeft); break;
-                    case Key.Escape: manager.Execute(Command.Play); break;
-                    case Key.Space: manager.Execute(Command.ForceFix); break;
+                    case Key.Z: x.Execute(Command.RotateLeft); break;
+                    case Key.X: x.Execute(Command.RotateRight); break;
+                    case Key.Up: x.Execute(Command.RotateRight); break;
+                    case Key.Right: x.Execute(Command.MoveRight); break;
+                    case Key.Down: x.Execute(Command.MoveDown); break;
+                    case Key.Left: x.Execute(Command.MoveLeft); break;
+                    case Key.Escape: x.Execute(Command.Play); break;
+                    case Key.Space: x.Execute(Command.ForceFix); break;
                 }
             };
         }

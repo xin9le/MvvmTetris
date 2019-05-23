@@ -1,4 +1,5 @@
-﻿using Reactive.Bindings;
+﻿using System;
+using Reactive.Bindings;
 using MvvmTetris.Engine.Models;
 
 
@@ -36,9 +37,9 @@ namespace MvvmTetris.Engine.ViewModels
 
 
         /// <summary>
-        /// コマンド管理機構を取得します。
+        /// 入力操作コマンドを取得します。
         /// </summary>
-        public CommandManager CommandManager { get; }
+        public ReactiveCommand<Command> InputCommand { get; } = new ReactiveCommand<Command>();
 
 
         /// <summary>
@@ -63,7 +64,20 @@ namespace MvvmTetris.Engine.ViewModels
             this.Score = new ScoreViewModel(this.Game.Score);
             this.Field = new FieldViewModel(this.Game.Field);
             this.NextField = new NextFieldViewModel(this.Game.NextTetrimino);
-            this.CommandManager = new CommandManager(this.Game);
+            this.InputCommand.Subscribe(x =>
+            {
+                switch (x)
+                {
+                    case Command.Play: this.Game.Play(); break;
+                    case Command.RotateRight: this.Game.Field.RotationTetrimino(RotationDirection.Right); break;
+                    case Command.RotateLeft: this.Game.Field.RotationTetrimino(RotationDirection.Left); break;
+                    case Command.MoveRight: this.Game.Field.MoveTetrimino(MoveDirection.Right); break;
+                    case Command.MoveLeft: this.Game.Field.MoveTetrimino(MoveDirection.Left); break;
+                    case Command.MoveDown: this.Game.Field.MoveTetrimino(MoveDirection.Down); break;
+                    case Command.ForceFix: this.Game.Field.ForceFixTetrimino(); break;
+                    default: throw new ArgumentOutOfRangeException(nameof(x));
+                }
+            });
         }
         #endregion
     }

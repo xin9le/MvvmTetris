@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:em="clr-namespace:MvvmTetris.Engine.Models;assembly=MvvmTetris.Engine"
         mc:Ignorable="d"
         Title="MvvmTetris.Wpf" Width="300" Height="300" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Background="#FFE0E0E0">
     <Window.Resources>
@@ -29,7 +30,7 @@
             <Grid x:Name="nextField" DataContext="{Binding NextField}" HorizontalAlignment="Center" />
 
             <!-- スコア -->
-            <Grid Grid.Row="2" HorizontalAlignment="Center" DataContext="{Binding Score}">
+            <Grid Grid.Row="1" HorizontalAlignment="Center" DataContext="{Binding Score}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
@@ -58,6 +59,35 @@
                 <TextBlock Grid.Row="3" Grid.Column="2" FontSize="16" TextAlignment="Right" Text="{Binding RowCount2.Value}" />
                 <TextBlock Grid.Row="4" Grid.Column="2" FontSize="16" TextAlignment="Right" Text="{Binding RowCount1.Value}" />
             </Grid>
+
+            <!-- コマンドボタン -->
+            <StackPanel Grid.Row="2">
+                <Button Command="{Binding InputCommand}" CommandParameter="{x:Static em:Command.Play}">Reset / Play</Button>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Command="{Binding InputCommand}" CommandParameter="{x:Static em:Command.RotateLeft}">左回転</Button>
+                    <Button Grid.Column="2" Command="{Binding InputCommand}" CommandParameter="{x:Static em:Command.ForceFix}">即落下</Button>
+                    <Button Grid.Column="4" Command="{Binding InputCommand}" CommandParameter="{x:Static em:Command.RotateRight}">右回転</Button>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Command="{Binding InputCommand}" CommandParameter="{x:Static em:Command.MoveLeft}">←</Button>
+                    <Button Grid.Column="2" Command="{Binding InputCommand}" CommandParameter="{x:Static em:Command.MoveDown}">↓</Button>
+                    <Button Grid.Column="4" Command="{Binding InputCommand}" CommandParameter="{x:Static em:Command.MoveRight}">→</Button>
+                </Grid>
+            </StackPanel>
         </Grid>
 
         <!-- ゲームオーバー -->
