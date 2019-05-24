@@ -17,18 +17,20 @@
 
     private void OnKeyDown(UIKeyboardEventArgs e)
     {
-        var x = this.Game.InputCommand;
+        Command command;
         switch (e.Code)
         {
-            case "KeyZ": x.Execute(Command.RotateLeft); break;
-            case "KeyX": x.Execute(Command.RotateRight); break;
-            case "ArrowUp": x.Execute(Command.RotateRight); break;
-            case "ArrowRight": x.Execute(Command.MoveRight); break;
-            case "ArrowDown": x.Execute(Command.MoveDown); break;
-            case "ArrowLeft": x.Execute(Command.MoveLeft); break;
-            case "Escape": x.Execute(Command.Play); break;
-            case "Space": x.Execute(Command.ForceFix); break;
+            case "KeyZ": command = Command.RotateLeft; break;
+            case "KeyX": command = Command.RotateRight; break;
+            case "ArrowUp": command = Command.RotateRight; break;
+            case "ArrowRight": command = Command.MoveRight; break;
+            case "ArrowDown": command = Command.MoveDown; break;
+            case "ArrowLeft": command = Command.MoveLeft; break;
+            case "Escape": command = Command.Play; break;
+            case "Space": command = Command.ForceFix; break;
+            default: return;
         }
+        this.Game.InputCommand.Execute(command);
     }
 }
 
