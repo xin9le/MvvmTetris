@@ -1,0 +1,44 @@
+﻿@inherits Microsoft.AspNetCore.Components.ComponentBase
+
+
+@using MvvmTetris.Engine.Models
+
+
+@functions
+{
+    [Parameter]
+    public EventCallback<Command> OnCommandInputed { get; set; }
+
+
+    private Task OnButtonClick(UIMouseEventArgs e, Command command)
+        => this.OnCommandInputed.InvokeAsync(command);
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <button type="button" class="btn btn-primary w-100" onclick="@(e => this.OnButtonClick(e, Command.Play))">Reset / Play</button>
+    </div>
+</div>
+<div class="row my-3">
+    <div class="col-4">
+        <button type="button" class="btn btn-primary w-100" onclick="@(e => this.OnButtonClick(e, Command.RotateLeft))">左回転</button>
+    </div>
+    <div class="col-4">
+        <button type="button" class="btn btn-primary w-100" onclick="@(e => this.OnButtonClick(e, Command.ForceFix))">即落下</button>
+    </div>
+    <div class="col-4">
+        <button type="button" class="btn btn-primary w-100" onclick="@(e => this.OnButtonClick(e, Command.RotateRight))">右回転</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4">
+        <button type="button" class="btn btn-primary w-100" onclick="@(e => this.OnButtonClick(e, Command.MoveLeft))">←</button>
+    </div>
+    <div class="col-4">
+        <button type="button" class="btn btn-primary w-100" onclick="@(e => this.OnButtonClick(e, Command.MoveDown))">↓</button>
+    </div>
+    <div class="col-4">
+        <button type="button" class="btn btn-primary w-100" onclick="@(e => this.OnButtonClick(e, Command.MoveRight))">→</button>
+    </div>
+</div>

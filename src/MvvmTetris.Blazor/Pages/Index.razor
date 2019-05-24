@@ -36,12 +36,13 @@
 <div class="game" tabindex="0" onkeydown="@this.OnKeyDown">
     <div class="container">
         <div class="row">
-            <div class="col-8">
+            <div class="col-6">
                 <FieldComponent Field="@this.Game.Field" />
             </div>
-            <div class="col-4">
+            <div class="col-6">
                 <FieldComponent Field="@this.Game.NextField" />
                 <ScoreComponent Score="@this.Game.Score" />
+                <InputComponent OnCommandInputed="@this.Game.InputCommand.Execute" />
             </div>
         </div>
     </div>
