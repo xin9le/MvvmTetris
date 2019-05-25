@@ -1,0 +1,56 @@
+﻿@page "/"
+
+
+@using MvvmTetris.Engine.Models
+@using MvvmTetris.Engine.ViewModels
+@using MvvmTetris.Blazor.ClientSide.Components
+
+
+@functions
+{
+    public GameViewModel Game { get; } = new GameViewModel();
+
+
+    protected override void OnInit()
+        => this.Game.InputCommand.Execute(Command.Play);
+
+
+    private void OnKeyDown(UIKeyboardEventArgs e)
+    {
+        Command command;
+        switch (e.Code)
+        {
+            case "KeyZ": command = Command.RotateLeft; break;
+            case "KeyX": command = Command.RotateRight; break;
+            case "ArrowUp": command = Command.RotateRight; break;
+            case "ArrowRight": command = Command.MoveRight; break;
+            case "ArrowDown": command = Command.MoveDown; break;
+            case "ArrowLeft": command = Command.MoveLeft; break;
+            case "Escape": command = Command.Play; break;
+            case "Space": command = Command.ForceFix; break;
+            default: return;
+        }
+        this.Game.InputCommand.Execute(command);
+    }
+}
+
+
+<div class="game" tabindex="0" onkeydown="@this.OnKeyDown">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <FieldComponent Field="@this.Game.Field" />
+            </div>
+            <div class="col-6">
+                <FieldComponent Field="@this.Game.NextField" />
+                <ScoreComponent Score="@this.Game.Score" />
+                <InputComponent OnCommandInputed="@this.Game.InputCommand.Execute" />
+            </div>
+        </div>
+    </div>
+
+    @if (this.Game.IsOver.Value)
+    {
+        <div class="game-over">Game is over !<br />Please press Esc key.</div>
+    }
+</div>

@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 
 
-namespace MvvmTetris.Blazor
+namespace MvvmTetris.Blazor.ClientSide
 {
     public class Startup
     {

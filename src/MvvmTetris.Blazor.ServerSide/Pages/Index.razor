@@ -3,16 +3,14 @@
 
 @using MvvmTetris.Engine.Models
 @using MvvmTetris.Engine.ViewModels
-@using MvvmTetris.Blazor.Components
+@using MvvmTetris.Blazor.ServerSide.Components
+@inject GameViewModel Game
 
 
 @functions
 {
-    public GameViewModel Game { get; } = new GameViewModel();
-
-
-    protected override void OnInit()
-        => this.Game.InputCommand.Execute(Command.Play);
+    //protected override void OnInit()
+        //=> this.Game.InputCommand.Execute(Command.Play);
 
 
     private void OnKeyDown(UIKeyboardEventArgs e)

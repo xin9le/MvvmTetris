@@ -2,7 +2,7 @@
 
 
 
-namespace MvvmTetris.Blazor
+namespace MvvmTetris.Blazor.ClientSide
 {
     public class Program
     {

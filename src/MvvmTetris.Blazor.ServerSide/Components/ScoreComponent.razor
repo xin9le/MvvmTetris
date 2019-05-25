@@ -1,0 +1,37 @@
+﻿@inherits Microsoft.AspNetCore.Components.ComponentBase
+
+
+@using MvvmTetris.Engine.ViewModels
+
+
+@functions
+{
+    [Parameter]
+    public ScoreViewModel Score { get; set; }
+}
+
+
+<table class="table table-borderless mt-3">
+    <tbody>
+        <tr>
+            <th>Total</th>
+            <td>@this.Score.TotalRowCount.Value</td>
+        </tr>
+        <tr>
+            <th>4 rows</th>
+            <td>@this.Score.RowCount4.Value</td>
+        </tr>
+        <tr>
+            <th>3 rows</th>
+            <td>@this.Score.RowCount3.Value</td>
+        </tr>
+        <tr>
+            <th>2 rows</th>
+            <td>@this.Score.RowCount2.Value</td>
+        </tr>
+        <tr>
+            <th>1 row</th>
+            <td>@this.Score.RowCount1.Value</td>
+        </tr>
+    </tbody>
+</table>

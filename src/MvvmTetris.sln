@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28822.285
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmTetris.Engine", "MvvmTetris.Engine\MvvmTetris.Engine.csproj", "{B0F21E39-216B-4F31-AE9E-8F3835C762C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmTetris.Engine", "MvvmTetris.Engine\MvvmTetris.Engine.csproj", "{B0F21E39-216B-4F31-AE9E-8F3835C762C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmTetris.CoreLib", "MvvmTetris.CoreLib\MvvmTetris.CoreLib.csproj", "{26B5CDC3-1204-4406-8249-14ADE155EF9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmTetris.CoreLib", "MvvmTetris.CoreLib\MvvmTetris.CoreLib.csproj", "{26B5CDC3-1204-4406-8249-14ADE155EF9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmTetris.Wpf", "MvvmTetris.Wpf\MvvmTetris.Wpf.csproj", "{A6622498-2B7F-4426-98BD-9AA30E8B4863}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmTetris.Wpf", "MvvmTetris.Wpf\MvvmTetris.Wpf.csproj", "{A6622498-2B7F-4426-98BD-9AA30E8B4863}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmTetris.Blazor", "MvvmTetris.Blazor\MvvmTetris.Blazor.csproj", "{F8B65893-A6BD-452E-BE81-AD2C719D2277}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmTetris.Blazor.ServerSide", "MvvmTetris.Blazor.ServerSide\MvvmTetris.Blazor.ServerSide.csproj", "{513C1E55-8D24-427C-A489-DC123EFCAB7C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmTetris.Blazor.ClientSide", "MvvmTetris.Blazor.ClientSide\MvvmTetris.Blazor.ClientSide.csproj", "{D0279E33-9678-4C66-94FB-6E121ADA5B4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +31,14 @@ Global
 		{A6622498-2B7F-4426-98BD-9AA30E8B4863}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6622498-2B7F-4426-98BD-9AA30E8B4863}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6622498-2B7F-4426-98BD-9AA30E8B4863}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8B65893-A6BD-452E-BE81-AD2C719D2277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8B65893-A6BD-452E-BE81-AD2C719D2277}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8B65893-A6BD-452E-BE81-AD2C719D2277}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8B65893-A6BD-452E-BE81-AD2C719D2277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{513C1E55-8D24-427C-A489-DC123EFCAB7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{513C1E55-8D24-427C-A489-DC123EFCAB7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{513C1E55-8D24-427C-A489-DC123EFCAB7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{513C1E55-8D24-427C-A489-DC123EFCAB7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0279E33-9678-4C66-94FB-6E121ADA5B4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0279E33-9678-4C66-94FB-6E121ADA5B4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0279E33-9678-4C66-94FB-6E121ADA5B4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0279E33-9678-4C66-94FB-6E121ADA5B4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
