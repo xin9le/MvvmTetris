@@ -33,6 +33,7 @@ This sample targets following platforms.
 - Display deleted rows information
 - Speed-up gradually (when tetrimino is deleted)
 - [Super rotation](https://ja.wikipedia.org/wiki/%E3%83%86%E3%83%88%E3%83%AA%E3%82%B9)
+- **Multi-Play** (only support Server-side Blazor)
 
 
 
