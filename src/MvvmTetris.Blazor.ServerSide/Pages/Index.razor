@@ -1,6 +1,8 @@
 ﻿@page "/"
 
 
+@using System.Reactive.Linq
+@using System.Threading
 @using MvvmTetris.Engine.Models
 @using MvvmTetris.Engine.ViewModels
 @using MvvmTetris.Blazor.ServerSide.Components
@@ -9,8 +11,14 @@
 
 @functions
 {
-    //protected override void OnInit()
-        //=> this.Game.InputCommand.Execute(Command.Play);
+    protected override void OnInit()
+    {
+        //this.Game.InputCommand.Execute(Command.Play);
+        this.Game.IsOver
+            .Merge(this.Game.IsPlaying)
+            .ObserveOn(SynchronizationContext.Current)
+            .Subscribe(_ => this.StateHasChanged());
+    }
 
 
     private void OnKeyDown(UIKeyboardEventArgs e)
