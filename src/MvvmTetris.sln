@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmTetris.CoreLib", "MvvmT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmTetris.Wpf", "MvvmTetris.Wpf\MvvmTetris.Wpf.csproj", "{A6622498-2B7F-4426-98BD-9AA30E8B4863}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmTetris.Blazor", "MvvmTetris.Blazor\MvvmTetris.Blazor.csproj", "{F8B65893-A6BD-452E-BE81-AD2C719D2277}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmTetris.Blazor.ServerSide", "MvvmTetris.Blazor.ServerSide\MvvmTetris.Blazor.ServerSide.csproj", "{513C1E55-8D24-427C-A489-DC123EFCAB7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmTetris.Blazor.ServerSide", "MvvmTetris.Blazor.ServerSide\MvvmTetris.Blazor.ServerSide.csproj", "{513C1E55-8D24-427C-A489-DC123EFCAB7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmTetris.Blazor.ClientSide", "MvvmTetris.Blazor.ClientSide\MvvmTetris.Blazor.ClientSide.csproj", "{D0279E33-9678-4C66-94FB-6E121ADA5B4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +31,14 @@ Global
 		{A6622498-2B7F-4426-98BD-9AA30E8B4863}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6622498-2B7F-4426-98BD-9AA30E8B4863}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6622498-2B7F-4426-98BD-9AA30E8B4863}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8B65893-A6BD-452E-BE81-AD2C719D2277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8B65893-A6BD-452E-BE81-AD2C719D2277}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8B65893-A6BD-452E-BE81-AD2C719D2277}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8B65893-A6BD-452E-BE81-AD2C719D2277}.Release|Any CPU.Build.0 = Release|Any CPU
 		{513C1E55-8D24-427C-A489-DC123EFCAB7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{513C1E55-8D24-427C-A489-DC123EFCAB7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{513C1E55-8D24-427C-A489-DC123EFCAB7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{513C1E55-8D24-427C-A489-DC123EFCAB7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0279E33-9678-4C66-94FB-6E121ADA5B4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0279E33-9678-4C66-94FB-6E121ADA5B4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0279E33-9678-4C66-94FB-6E121ADA5B4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0279E33-9678-4C66-94FB-6E121ADA5B4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
