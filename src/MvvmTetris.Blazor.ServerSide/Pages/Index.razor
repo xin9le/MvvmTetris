@@ -4,13 +4,11 @@
 @using MvvmTetris.Engine.Models
 @using MvvmTetris.Engine.ViewModels
 @using MvvmTetris.Blazor.ServerSide.Components
+@inject GameViewModel Game
 
 
 @functions
 {
-    public GameViewModel Game { get; } = new GameViewModel();
-
-
     protected override void OnInit()
         => this.Game.InputCommand.Execute(Command.Play);
 
