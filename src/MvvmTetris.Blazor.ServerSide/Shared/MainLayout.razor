@@ -1,15 +1,21 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="sidebar">
-    <NavMenu />
-</div>
 
-<div class="main">
-    <div class="top-row px-4">
-        <a href="https://docs.microsoft.com/en-us/aspnet/" target="_blank" class="ml-md-auto">About</a>
-    </div>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">MvvmTetris</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="https://github.com/xin9le/MvvmTetris">GitHub</a>
+                <a class="nav-item nav-link" href="https://twitter.com/xin9le">&copy; xin9le</a>
+            </div>
+        </div>
+    </nav>
+</header>
 
-    <div class="content px-4">
-        @Body
-    </div>
-</div>
+<main>
+    @this.Body
+</main>
