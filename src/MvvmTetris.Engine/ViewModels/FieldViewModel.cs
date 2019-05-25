@@ -44,12 +44,6 @@ namespace MvvmTetris.Engine.ViewModels
         /// アクティブ状態かどうかを取得します。
         /// </summary>
         public IReadOnlyReactiveProperty<bool> IsActivated => this.Field.IsActivated;
-
-
-        /// <summary>
-        /// 背景色を取得します。
-        /// </summary>
-        private Color BackgroundColor => Color.WhiteSmoke;
         #endregion
 
 
@@ -88,7 +82,7 @@ namespace MvvmTetris.Engine.ViewModels
                             var p = x.Position;
                             if (p.Row < 0) continue;
                             if (p.Column < 0) continue;
-                            this.Cells[p.Row, p.Column].Color.Value = this.BackgroundColor;
+                            this.Cells[p.Row, p.Column].Color.Value = CellViewModel.DefaultColor;
                         }
                         previous = null;
                     }
@@ -128,7 +122,7 @@ namespace MvvmTetris.Engine.ViewModels
                     var color = blocks.GetValueOrDefault(item.X)
                                 ?.GetValueOrDefault(item.Y)
                                 ?.Color
-                                ?? this.BackgroundColor;
+                                ?? CellViewModel.DefaultColor;
                     item.Element.Color.Value = color;
                 }
                 this.changed.OnNext(Unit.Default);
@@ -139,7 +133,7 @@ namespace MvvmTetris.Engine.ViewModels
             {
                 for (int r = 0; r < this.Cells.GetLength(0); r++)
                     for (int c = 0; c < this.Cells.GetLength(1); c++)
-                        this.Cells[r, c].Color.Value = this.BackgroundColor;
+                        this.Cells[r, c].Color.Value = CellViewModel.DefaultColor;
 
                 this.changed.OnNext(Unit.Default);
             });

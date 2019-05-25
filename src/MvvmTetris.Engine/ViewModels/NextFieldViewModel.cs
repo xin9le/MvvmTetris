@@ -43,12 +43,6 @@ namespace MvvmTetris.Engine.ViewModels
         /// セルのコレクションを取得します。
         /// </summary>
         public CellViewModel[,] Cells { get; }
-
-
-        /// <summary>
-        /// 背景色を取得します。
-        /// </summary>
-        private Color BackgroundColor => Color.WhiteSmoke;
         #endregion
 
 
@@ -71,7 +65,7 @@ namespace MvvmTetris.Engine.ViewModels
                 {
                     //--- 一旦クリア
                     foreach (var c in this.Cells)
-                        c.Color.Value = this.BackgroundColor;
+                        c.Color.Value = CellViewModel.DefaultColor;
 
                     //--- ブロック部分に色を塗る
                     var tetrimino = new Tetrimino(x, InitialPosition(x));
