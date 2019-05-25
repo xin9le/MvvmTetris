@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MvvmTetris.Blazor.ServerSide.Data;
+
+
 
 namespace MvvmTetris.Blazor.ServerSide
 {
@@ -37,11 +33,8 @@ namespace MvvmTetris.Blazor.ServerSide
             }
 
             app.UseHttpsRedirection();
-
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
