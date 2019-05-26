@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-    <LangVersion>7.3</LangVersion>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <LangVersion>7.3</LangVersion>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MvvmTetris.Engine\MvvmTetris.Engine.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\MvvmTetris.Engine\MvvmTetris.Engine.csproj" />
+    </ItemGroup>
 
 </Project>
