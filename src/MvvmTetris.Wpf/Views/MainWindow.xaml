@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:em="clr-namespace:MvvmTetris.Engine.Models;assembly=MvvmTetris.Engine"
         mc:Ignorable="d"
-        Title="MvvmTetris.Wpf" Width="300" Height="300" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Background="#FFE0E0E0">
+        Title="MvvmTetris.Wpf" Width="500" Height="300" SizeToContent="Height" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Background="#FFE0E0E0">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
